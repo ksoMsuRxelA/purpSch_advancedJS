@@ -1,17 +1,20 @@
-const usersList = [
-  { id: 0, name: "Вася" },
-  { id: 1, name: "Вася" },
-  { id: 2, name: "Петя" },
-  { id: 1, name: "Вася" },
-  { id: 3, name: "Алла" },
-  { id: 2, name: "Пётр" },
-  { id: 1707, name: "Руслан" },
-];
+const rollDice = (diceType) =>
+  Math.floor(Math.random() * Number(diceType.slice(1))) + 1;
 
-const usersSet = new Set(
-  [...new Set(usersList.map(({ id }) => id))].map((uniqueId) =>
-    usersList.find(({ id }) => id === uniqueId)
-  )
+dice = 20; // set number of dice edges there
+const edges = [];
+
+while (edges.length < dice) {
+  const attempt = rollDice(`d${dice}`);
+  if (!edges.includes(attempt)) {
+    edges.push(attempt);
+  }
+}
+
+console.log(
+  edges.sort((a, b) => {
+    if (a < b) return -1;
+    if (a > b) return 1;
+    return 0;
+  })
 );
-
-console.log("🚀 ~ usersSet:", usersSet);
